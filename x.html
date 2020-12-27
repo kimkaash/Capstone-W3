@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Where to Go When You Want to Eat Pizza ? | The-Battle-of-Neighborhoods</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Where to Go When You Want to Eat Pizza ?" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Science Capstone course project offered by IBM on Coursera" />
+<meta property="og:description" content="Data Science Capstone course project offered by IBM on Coursera" />
+<link rel="canonical" href="https://mmahrouss.github.io/The-Battle-of-Neighborhoods/DS_Capstone_report.html" />
+<meta property="og:url" content="https://mmahrouss.github.io/The-Battle-of-Neighborhoods/DS_Capstone_report.html" />
+<meta property="og:site_name" content="The-Battle-of-Neighborhoods" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"https://mmahrouss.github.io/The-Battle-of-Neighborhoods/DS_Capstone_report.html","headline":"Where to Go When You Want to Eat Pizza ?","description":"Data Science Capstone course project offered by IBM on Coursera","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/The-Battle-of-Neighborhoods/assets/css/style.css?v=f9dfd508d3a4dc6629fc2a4d7f3f5bc305f3da69">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://mmahrouss.github.io/The-Battle-of-Neighborhoods/">The-Battle-of-Neighborhoods</a></h1>
+      
+
+      <h1 id="where-to-go-when-you-want-to-eat-pizza-">Where to Go When You Want to Eat Pizza ?</h1>
+
+<p><em>Data Science Capstone - IBM Data Science Professional Certificate on Coursera</em></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Let’s say you have never been to the US and you want to have only pizza while you are there. So you want to go to a place with a high density of Pizza places around you. The problem we aim to solve is to analyze the Pizza stores’ locations in the major US cities and find the best place for our tourist so that he can have a good pizz-ourism. Our main target are tourists with a taste of western-style pizza</p>
+
+<h2 id="data-section">Data section</h2>
+
+<p>I will use the FourSquare API to collect data about locations of Pizza stores in 5 major US cities which are: New York,NY, San Francisco, CA, Jersey City, NJ,  Boston, MA and Chicago,IL. These are one of the most populated US cities and I am hopeful that they will contain the best Pizza places in the US.</p>
+
+<h2 id="methodology">Methodology</h2>
+
+<p>My main target here is to asses which city would have the highest Pizza store density. I used the Four Square API through the venues channel. I used the near query to get venues in the cities. Also, I use the CategoryID to set it to show only Pizza Places. An Example of my requests:</p>
+
+<p><code class="highlighter-rouge"> https://api.foursquare.com/v2/venues/explore?&amp;client_id=&amp;client_secret=&amp;v=20180605&amp;New York, NY&amp;limit=100&amp;categoryId=4bf58dd8d48988d1ca941735</code></p>
+
+<p>That 4bf58dd8d48988d1ca941735 is the Id of the Pizza Place Category. Also, Foursquare limits us to maximum of 100 venues per query.</p>
+
+<p>Moreover, I repeated this request for the 5 studied cities and got their top 100 venues. I saved the name and coordinate data only from the result and plotted them on the map for visual inspection.</p>
+
+<p>Next, to get an indicator of the density of Pizza Places, I calculated a center coordinate of the venues to get the mean longitude and latitude values.  Then I calculated the mean of the Euclidean distance from each venue to the mean coordinates. That was my indicator; mean distance to the mean coordinate.</p>
+
+<h2 id="results">Results</h2>
+
+<p>For our initial visual inspection we see that they all have multiple pizza places and often more than Foursquare would like to supply us. The following here are the pictures of the geoplot generated with folium:</p>
+
+<h4 id="new-york">New York:</h4>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570114968097.png" alt="New York Geoplot" /></p>
+
+<h4 id="chicago">Chicago:</h4>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570115035264.png" alt="Chicago Geo plot" /></p>
+
+<h4 id="san-francisco">San Francisco:</h4>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570115744107.png" alt="SF" /></p>
+
+<h4 id="jersey-city">Jersey City:</h4>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570115780585.png" alt="Jc" /></p>
+
+<h4 id="boston">Boston:</h4>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570115810909.png" alt="1570115810909" /></p>
+
+<p>Upon First inspection we see that New York, Jersey City and San Francisco are the most densely cities. In the next phase we Calculate the Mean coordinate and the mean distance to mean coordinate(MDMC). We represent the mean coordinate with a big green circle and distances with green lines</p>
+
+<h4 id="new-york-1">New York:</h4>
+
+<p>MDMC: 0.021556</p>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570116007629.png" alt="1570116007629" /></p>
+
+<h4 id="chicago-1">Chicago:</h4>
+
+<p>MDMC: 0.052805</p>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570116072129.png" alt="1570116072129" /></p>
+
+<h4 id="san-francisco-1">San Francisco:</h4>
+
+<p>MDMC: 0.028633</p>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570116146328.png" alt="1570116146328" /></p>
+
+<h4 id="jersey-city-1">Jersey City:</h4>
+
+<p>MDMC: 0.029950</p>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570116170991.png" alt="1570116170991" /></p>
+
+<h4 id="boston-1">Boston:</h4>
+
+<p>MDMC: 0.035126</p>
+
+<p><img src="/The-Battle-of-Neighborhoods/1570116196100.png" alt="1570116196100" /></p>
+
+<p>Therefore our results are :</p>
+
+<ol>
+  <li>New York</li>
+  <li>San Francisco</li>
+  <li>Jersey City</li>
+  <li>Boston</li>
+  <li>Chicago</li>
+</ol>
+
+<h2 id="discussion">Discussion:</h2>
+
+<p>One thing I noticed in the figure is that there is a really far away Pizza Store in Jersey City that is probably giving it a higher MDMC. So I cheched what if I removed it, it would not harm anyone to try 99 pizza places than 100 and New York is just at the other shore.</p>
+
+<p>The new MDMC was: 0.0219953, putting it one place up on the list replacing San Francisco.</p>
+
+<p>One consideration to do further work on is to move the location of the Foursquare API query until we get all the pizza places in each city and do the calculations again.</p>
+
+<h2 id="conclusion">Conclusion:</h2>
+
+<p>Now there is no doubt that New York is the best place to try many Pizza Places in the US. Also, if our tourist is done with all the New York pizza places he can cross to Jersey City and enjoy 99 more.</p>
+
+<p>Also, we would recommend that our tourist book a hotel close to the mean coordinate.</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    
+  </body>
+</html>
